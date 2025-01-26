@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" defer src="script.js"></script>
+  </head>
+  <body>
+    <div class="mainWrapper">
+      <aside class="aside">
+        <div class="videos">
+          <button class="selected">video 1</button>
+          <button>video 2</button>
+          <button>video 3</button>
+          <button>video 4</button>
+          <button>video 5</button>
+          <button>video 6</button>
+          <button>video 7</button>
+          <button>video 8</button>
+          <button>video 9</button>
+          <button>video 10</button>
+          <button>video 11</button>
+          <button>video 12</button>
+          <button>video 13</button>
+          <button>video 14</button>
+          <button>video 15</button>
+          <button>video 16</button>
+          <button>video 17</button>
+          <button>video 18</button>
+          <button>video 19</button>
+          <button>video 20</button>
+        </div>
+      </aside>
+      <main class="container">
+        <div class="videoContainer">
+          <video
+            src=" http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+            id="myVideo"
+          ></video>
+          <div class="videoControls">
+            <!-- <input type="range" id="seekBar" value="0" /> -->
+            <div class="leftControls">
+              <button id="previousBtn">
+                <img src="./images/icons/nextVideo.svg" alt="Previous Video" />
+              </button>
+              <button id="playPauseBtn">
+                <img src="./images/icons/play.svg" alt="Play/Pause" />
+              </button>
+              <button id="nextBtn">
+                <img src="./images/icons/nextVideo.svg" alt="Next Video" />
+              </button>
+              <button id="soundBtn">
+                <img src="./images/icons/sound.svg" alt="Mute/Unmute" />
+              </button>
+              <input
+                type="range"
+                id="volumeBar"
+                min="0"
+                max="1"
+                step="0.1"
+                value="1"
+              />
+            </div>
+            <div class="right-controls">
+              <button id="fullScreenBtn">
+                <img
+                  src="./images/icons/enterFullScreen.svg"
+                  alt="Full Screen"
+                />
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
