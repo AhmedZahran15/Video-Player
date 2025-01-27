@@ -7,6 +7,9 @@ const soundBtn = document.querySelector("#soundBtn");
 const volumeBar = document.querySelector("#volumeBar");
 const fullScreenBtn = document.querySelector("#fullScreenBtn");
 const videoControls = document.querySelector(".videoControls");
+// const tracks = document.querySelectorAll("track");
+const subtitleDiv = document.querySelector(".videoSubtitles");
+
 const videoLinks = [
   "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
   "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
@@ -128,3 +131,13 @@ function handlePreviousVideo() {
   if (videos[0].classList.contains("selected"))
     previousBtn.style.display = "none";
 }
+
+const track = myVideo.textTracks[0];
+track.addEventListener("cuechange", () => {
+  const activeCue = track.activeCues[0];
+  if (activeCue) {
+    subtitleDiv.textContent = activeCue.text;
+  } else {
+    subtitleDiv.textContent = "";
+  }
+});
