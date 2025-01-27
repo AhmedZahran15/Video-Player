@@ -1,5 +1,6 @@
+import videos from "./VideoDatabase.js";
+
 const myVideo = document.querySelector("#myVideo");
-const videos = document.querySelectorAll("aside button");
 const playPauseBtn = document.querySelector("#playPauseBtn");
 const previousBtn = document.querySelector("#previousBtn");
 const nextBtn = document.querySelector("#nextBtn");
@@ -7,30 +8,29 @@ const soundBtn = document.querySelector("#soundBtn");
 const volumeBar = document.querySelector("#volumeBar");
 const fullScreenBtn = document.querySelector("#fullScreenBtn");
 const videoControls = document.querySelector(".videoControls");
+const videoTitle = document.querySelector("#videoTitle");
 // const tracks = document.querySelectorAll("track");
 const subtitleDiv = document.querySelector(".videoSubtitles");
 
-const videoLinks = [
-  "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-  "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-  "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-  "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
-  "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-  "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-  "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-  "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
-  "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
-  "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-];
-
 videos.forEach((video, index) => {
-  video.addEventListener("click", () => {
-    myVideo.src = videoLinks[index % videoLinks.length];
-    myVideo.play();
-    videos.forEach((video) => video.classList.remove("selected"));
-    video.classList.add("selected");
+  const button = document.createElement("button");
+  button.textContent = `Video ${index + 2}`;
+  document.querySelector(".videos").appendChild(button);
+  button.addEventListener("click", () => {
+    myVideo.src = video.sources[0];
+    videoTitle.textContent = video.title;
+    videosButtons.forEach((video) => video.classList.remove("selected"));
+    button.classList.add("selected");
   });
 });
+const videosButtons = document.querySelectorAll("aside button");
+videosButtons[0].addEventListener("click", () => {
+  myVideo.src = "./Videos/BiteMarksVideo.mp4";
+  videoTitle.textContent = "Bite Marks - League of Legends";
+  videosButtons.forEach((video) => video.classList.remove("selected"));
+  videosButtons[0].classList.add("selected");
+});
+
 
 myVideo.parentElement.addEventListener("click", handlePlayPause);
 playPauseBtn.addEventListener("click", handlePlayPause);
@@ -40,6 +40,11 @@ soundBtn.addEventListener("click", handleMute);
 fullScreenBtn.addEventListener("click", handleFullScreenChange);
 myVideo.addEventListener("dblclick", handleFullScreenChange);
 volumeBar.addEventListener("input", handleVolumeChange);
+myVideo.addEventListener("ended", handleNextVideo);
+/* myVideo.addEventListener("timeupdate", () => {
+  const percentage = (myVideo.currentTime / myVideo.duration) * 100;
+  document.querySelector("#progressBar").style.width = `${percentage}%`;
+}); */
 
 videoControls.addEventListener("click", (e) => {
   e.stopPropagation();
@@ -66,6 +71,7 @@ document.addEventListener("keydown", (e) => {
       break;
     case "m":
       handleMute();
+      break;
   }
 });
 
@@ -108,27 +114,28 @@ function handleFullScreenChange() {
 }
 function handleNextVideo() {
   previousBtn.style.display = "block";
-  playPauseBtn.children[0].src = "./images/icons/pause.svg";
-  if (!videos[videos.length - 1].classList.contains("selected")) {
-    videos[
-      Array.from(videos).findIndex((video) =>
+  playPauseBtn.children[0].src = "./images/icons/play.svg";
+  if (!videosButtons[videosButtons.length - 1].classList.contains("selected")) {
+    videosButtons[
+      Array.from(videosButtons).findIndex((video) =>
         video.classList.contains("selected")
       ) + 1
     ].click();
   }
-  if (videos[videos.length - 1].classList.contains("selected"))
+  if (videosButtons[videosButtons.length - 1].classList.contains("selected"))
     nextBtn.style.display = "none";
 }
 function handlePreviousVideo() {
-  playPauseBtn.children[0].src = "./images/icons/pause.svg";
-  if (!videos[0].classList.contains("selected")) {
-    videos[
-      Array.from(videos).findIndex((video) =>
+  nextBtn.style.display = "block";
+  playPauseBtn.children[0].src = "./images/icons/play.svg";
+  if (!videosButtons[0].classList.contains("selected")) {
+    videosButtons[
+      Array.from(videosButtons).findIndex((video) =>
         video.classList.contains("selected")
       ) - 1
     ].click();
   }
-  if (videos[0].classList.contains("selected"))
+  if (videosButtons[0].classList.contains("selected"))
     previousBtn.style.display = "none";
 }
 
