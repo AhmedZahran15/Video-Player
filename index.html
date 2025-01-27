@@ -35,10 +35,22 @@
       </aside>
       <main class="container">
         <div class="videoContainer">
-          <video
-            src=" http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
-            id="myVideo"
-          ></video>
+          <video src="./Videos/BiteMakrsVidoe.mp4" id="myVideo">
+            <track
+              src="./Videos/BiteMakrsSubtitles.vtt"
+              kind="subtitles"
+              srclang="en"
+              label="English"
+              default
+            />
+          </video>
+          <div class="videoOverlay">
+            <div class="videoInfo">
+              <h1>Video Title</h1>
+              <p>Video Description</p>
+            </div>
+          </div>
+          <div class="videoSubtitles"></div>
           <div class="videoControls">
             <!-- <input type="range" id="seekBar" value="0" /> -->
             <div class="leftControls">
