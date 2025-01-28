@@ -21,8 +21,8 @@ playPauseBtn.addEventListener("click", handlePlayPause);
 nextBtn.addEventListener("click", handleNextVideo);
 previousBtn.addEventListener("click", handlePreviousVideo);
 soundBtn.addEventListener("click", handleMute);
-fullScreenBtn.addEventListener("click", handleFullScreenChange);
-myVideo.addEventListener("dblclick", handleFullScreenChange);
+fullScreenBtn.addEventListener("click", handleFullScreen);
+myVideo.addEventListener("dblclick", handleFullScreen);
 volumeBar.addEventListener("input", handleVolumeChange);
 myVideo.addEventListener("ended", handleNextVideo);
 myVideo.addEventListener("timeupdate", updateTime);
@@ -49,11 +49,19 @@ document.addEventListener("keydown", (e) => {
       myVideo.currentTime -= 5;
       break;
     case "f":
-      handleFullScreenChange();
+      handleFullScreen();
       break;
     case "m":
       handleMute();
       break;
+  }
+});
+
+document.addEventListener("fullscreenchange", () => {
+  if (!document.fullscreenElement) {
+    fullScreenBtn.children[0].src = "./images/icons/enterFullScreen.svg";
+  } else {
+    fullScreenBtn.children[0].src = "./images/icons/exitFullScreen.svg";
   }
 });
 
@@ -132,12 +140,10 @@ function handleMute() {
     soundBtn.children[0].src = "./images/icons/sound.svg";
   }
 }
-function handleFullScreenChange() {
+function handleFullScreen() {
   if (document.fullscreenElement) {
-    fullScreenBtn.children[0].src = "./images/icons/enterFullScreen.svg";
     document.exitFullscreen();
   } else {
-    fullScreenBtn.children[0].src = "./images/icons/exitFullScreen.svg";
     myVideo.parentElement.requestFullscreen();
   }
 }
