@@ -1,5 +1,12 @@
 const videos = [
   {
+    description: "League of legends season 15 cinematic trailer",
+    sources: ["./Videos/BiteMarksVideo.mp4"],
+    subtitle: "By Riot Games",
+    thumb: "https://i.ytimg.com/vi/I76wvt0aEE4/maxresdefault.jpg",
+    title: "Bite Marks - League of Legends",
+  },
+  {
     description:
       "Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself. When one sunny day three rodents rudely harass him, something snaps... and the rabbit ain't no bunny anymore! In the typical cartoon tradition he prepares the nasty rodents a comical revenge.\n\nLicensed under the Creative Commons Attribution license\nhttp://www.bigbuckbunny.org",
     sources: [
